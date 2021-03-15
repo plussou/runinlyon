@@ -45,7 +45,7 @@ def get_full_ranking(url, course, total_number_of_results, logger, debbug=False)
     for i in range(len(drop_down_buttons)):
         label = drop_down_buttons[i].find_element_by_class_name('labeled-dropdown__label').text.strip()
         logger.info(f'menu {i}->{label}<-')
-        if label.find('Course') >= 0:
+        if (label.find('Course') >= 0) or (label.find('Parcours') >= 0):
             label_menu = copy.copy(label)
             course_menu = copy.copy(i)
 
