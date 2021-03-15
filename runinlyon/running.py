@@ -92,8 +92,9 @@ def get_full_ranking(url, course, total_number_of_results, logger, debbug=False)
         rank = element.find_element_by_class_name('event-home__rank').text
         bib = element.find_element_by_class_name('event-home__bib').find_element_by_class_name('event-home__result').text
         sex,age = element.find_element_by_class_name('event-home__person').find_element_by_class_name('event-home__info').text.split('|')
+        age = age.split()[1].strip()
         time = element.find_element_by_class_name('event-home__finish').find_element_by_class_name('event-home__result').text
-        data.append([rank,bib,sex.strip(), int(age.replace('Age','').strip()),time])
+        data.append([rank,bib,sex.strip(),int(age),time])
 
     driver.close()
     data_df = pd.DataFrame(data,columns=['rank','bib','sex','age','time'])
