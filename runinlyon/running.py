@@ -14,6 +14,29 @@ options.headless = True
 #  Scrapping data from Active Result web site
 # --------------------------------------------
 
+def get_results_vienna(params, logger, debbug=False):
+    '''get results from Vienna events'''
+
+    url = params['url']
+
+    ''' step 1: select course from menu'''
+
+    driver = webdriver.Firefox(options=options)
+    driver.get(url)
+
+    input_menu_year = driver.find_element_by_class_name('input')
+    input_menu_year = driver.find_element_by_class_name('input')
+    confirmation = driver.find_element_by_class_name('input')
+
+    ''' step 2: select ranking range'''
+
+    ranking_range_menu = 8
+
+    table = driver.find_element_by_class_name('resultList')
+
+    return table
+
+
 def get_full_ranking(url, course, total_number_of_results, logger, debbug=False):
     ''' get the full ranking table for a given course'''
 
