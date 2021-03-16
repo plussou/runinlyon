@@ -23,6 +23,8 @@ clean:
 	@rm -f *.log
 	@rm -f */*.log
 	@rm -f .coverage
+	@rm -Rf .ipynb_checkpoints
+	@rm -Rf notebooks/.ipynb_checkpoints
 	@rm -Rf */__pycache__
 	@rm -Rf */*.pyc
 	@rm -Rf runinlyon.egg-info
