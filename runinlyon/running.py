@@ -44,7 +44,7 @@ def get_full_ranking(url, course, total_number_of_results, logger, debbug=False)
     logger.info(f'url    : {url}')
     logger.info(f'course : {course}')
     if debbug :
-        total_number_of_results = 5
+        total_number_of_results = 155
         logger.info('!! mode test !!')
     logger.info(f'n_bib  : {total_number_of_results}')
 
@@ -82,14 +82,14 @@ def get_full_ranking(url, course, total_number_of_results, logger, debbug=False)
         if label==course:
             course_item = copy.copy(i)
     if not isinstance(course_item, int):
-        logger.info(f'{course} not found')
-        return []
+        logger.info(f'menu choice {course} not found')
+        logger.info('scraping anyway')
+    else:
+        logger.info(f'From menu       :{label_menu}')
+        logger.info(f'Selecting course:{course}')
 
-    logger.info(f'From menu       :{label_menu}')
-    logger.info(f'Selecting course:{course}')
-
-    driver.execute_script("arguments[0].click();", button)
-    driver.execute_script("arguments[0].click();", menu_items[course_item])
+        driver.execute_script("arguments[0].click();", button)
+        driver.execute_script("arguments[0].click();", menu_items[course_item])
 
     ''' step 3: load results by 50'''
     n_results = len(driver.find_elements_by_class_name('event-home__item'))
@@ -98,7 +98,7 @@ def get_full_ranking(url, course, total_number_of_results, logger, debbug=False)
         n_reloads = ((total_number_of_results - n_results)//50)+1
         for i in range(n_reloads):
             try:
-                driver.implicitly_wait(2)
+                driver.implicitly_wait(5)
                 view_more_footer = driver.find_element_by_class_name('view-more-list__footer')
                 button = view_more_footer.find_element_by_tag_name('a')
                 driver.execute_script("arguments[0].click();", button)
